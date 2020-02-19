@@ -1,1 +1,1 @@
- Hello NEW world
+Welcome to NetChar!
