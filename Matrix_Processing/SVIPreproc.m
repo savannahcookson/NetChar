@@ -19,16 +19,23 @@ allROIs = allROIs';
 
 includedROIs = setdiff(allROIs,MISSINGROIS);
 
-avgMat = subAvg(INDIVMATS);
+% Added ability to process individual matrices
+% defunct: avgMat = subAvg(INDIVMATS);
 
-avgMatPos = zeroNegs(avgMat);
+posMat = zeroDiag(INDIVMATS);
 
-weightedMat = zeroDiag(avgMatPos);
+weightedMat = zeroNegs(posMat);
 
 threshMat = thresholdMat(weightedMat,.1);
 
 binaryMat = binarizeMat(threshMat);
 
-sviformat(binaryMat,PREFIX);
+avgMat = mean(binaryMat,3);
+
+threshAvMat = thresholdMat(avgMat,.1);
+
+binaryAvMat = binarizeMat(threshAvMat);
+
+sviformat(binaryAvMat,PREFIX);
 
 end
